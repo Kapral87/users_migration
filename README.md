@@ -36,6 +36,11 @@ composer update
 ./vendor/bin/sail artisan key:generate
 ```
 
+* Create the symbolic link to storage folder
+```
+./vendor/bin/sail artisan storage:link
+```
+
 * Migrate tables
 ```
 ./vendor/bin/sail artisan migrate

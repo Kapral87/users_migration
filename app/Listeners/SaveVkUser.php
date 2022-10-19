@@ -31,11 +31,14 @@ class SaveVkUser
     {
         $user_info = $event->vk_user;
 
-        $saved_vk_user = VkUser::updateOrCreate([
-            'vk_id'   => intval($user_info['id']),
-        ],[
-            'name'    => implode(' ', [$user_info['first_name'], $user_info['last_name']]),
-        ]);
+        $saved_vk_user = VkUser::updateOrCreate(
+            [
+                'vk_id'   => intval($user_info['id']),
+            ],
+            [
+                'name'    => implode(' ', [$user_info['first_name'], $user_info['last_name']]),
+            ]
+        );
         $saved_vk_user->addMediaFromUrl($user_info['photo_200'])->usingFileName(
             $saved_vk_user->id .
             '_' .

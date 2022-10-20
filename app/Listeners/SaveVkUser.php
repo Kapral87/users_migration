@@ -33,20 +33,18 @@ class SaveVkUser
 
         $saved_vk_user = VkUser::updateOrCreate(
             [
-                'vk_id'   => intval($user_info['id']),
+                'vk_id' => intval($user_info['id']),
             ],
             [
-                'name'    => implode(' ', [$user_info['first_name'], $user_info['last_name']]),
+                'name' => implode(' ', [$user_info['first_name'], $user_info['last_name']]),
             ]
         );
         $saved_vk_user->addMediaFromUrl($user_info['photo_200'])->usingFileName(
             $saved_vk_user->id .
             '_' .
-            Self::AVATAR_FILE_NAME_POSTFIX .
+            self::AVATAR_FILE_NAME_POSTFIX .
             '.' .
             \File::extension(parse_url($user_info['photo_200'], PHP_URL_PATH))
         )->toMediaCollection('avatar');
-
-        return;
     }
 }

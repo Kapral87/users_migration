@@ -27,17 +27,17 @@ class Api
             'user_id' => env('VK_USER_ID'),
             'fields' => 'first_name,last_name,photo_200',
             'access_token' => env('VK_APP_ACCESS_TOKEN'),
-            'v' => Self::API_VERSION
+            'v' => self::API_VERSION
         ];
 
-        $response = Http::get(Self::VK_GET_FRIENDS_URL, $params)->json();
+        $response = Http::get(self::VK_GET_FRIENDS_URL, $params)->json();
 
         if (isset($response['error'])) {
-            throw new \Exception(sprintf(Self::ERROR_MESSAGE_VK, $response['error']['error_code'], $response['error']['error_msg']));
+            throw new \Exception(sprintf(self::ERROR_MESSAGE_VK, $response['error']['error_code'], $response['error']['error_msg']));
         }
 
         if (!isset($response['response'])) {
-            throw new \Exception(sprintf(Self::ERROR_MESSAGE_VK, Self::UNKNOWN_ERROR_CODE, Self::UNKNOWN_ERROR_MESSAGE));
+            throw new \Exception(sprintf(self::ERROR_MESSAGE_VK, self::UNKNOWN_ERROR_CODE, self::UNKNOWN_ERROR_MESSAGE));
         }
 
         return $response['response']['items'] ?? [];
